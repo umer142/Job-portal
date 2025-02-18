@@ -16,6 +16,15 @@ const Applications = () => {
   return (
     <>
       <Navbar />
+      <div className="text-center mx-18 mt-5"><h1 className="text-xl font-bold text-white bg-blue-400 p-2 rounded-xl">Upload your resume in PDF format along with a screenshot of your JazzCash transaction.
+          <br />  <span className="text-lg text-white bg-red-400 p-1 rounded  ">Otherwise Your application Did not Accept</span></h1>
+         <div className="bg-green-400  rounded font-bold text-xl p-4 text-white inline-block mt-3">
+         <br />  <span>JazzCash # 0300000000</span>
+          <br /> <span>Easypasa # 0300000000</span>
+          <br /><span>Meezan AC # 02120100002102</span>
+          </div>
+          </div>
+          <div></div>
       <div className="container px-4 min-h-[65vh] 2xl:px-20 mx-auto my-10">
         <h2 className="text-xl font-semibold">Your Resume</h2>
         <div className="flex gap-2 mb-6 mt-3">

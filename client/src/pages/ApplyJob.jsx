@@ -31,6 +31,7 @@ const ApplyJob = () => {
   return JobData ?  (
     <>
     <Navbar/>
+   
       <div className='min-h-screen flex flex-col py-10 container px-8 2xl:px-20 mx-auto'>
         <div className='bg-white text-black rounded-lg w-full  '>
           <div className='flex justify-center md:justify-between flex-wrap gap-8 px-14 py-20 bg-green-50 border border-green-400 rounded-xl'>

@@ -8,14 +8,15 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen ">
       {/* Navbar For recruiter Panal  */}
-      <div className="shadow py-4">
+      <div className="shadow ">
         <div className="px-5 flex justify-between items-center">
           <img
             onClick={(e) => navigate("/")}
-            className="max-sm:w-32 cursor-pointer "
+            className="max-sm:w-32 h-32  cursor-pointer "
             src={assets.logo}
             alt=""
           />
+         
           <div className="flex items-center gap-3">
             <p className="max-sm:hidden">Welcome, GreatStack </p>
             <div className="relative group">
