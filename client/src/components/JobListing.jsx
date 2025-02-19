@@ -146,7 +146,7 @@ const JobListing = () => {
                     </button>
                   </a>
                 ))}
-                <a href="job-list">
+                {/* <a href="job-list">
                   <img
                     onClick={() =>
                       setCurrentPage(Math.min(currentPage + 1, Math.ceil(filteredJobs.length / 6)))
@@ -154,7 +154,7 @@ const JobListing = () => {
                     src={assets.right_arrow_icon}
                     alt="error"
                   />
-                </a>
+                </a> */}
               </div>
             )}
           </section>

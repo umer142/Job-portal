@@ -1,23 +1,78 @@
+
 /* eslint-disable no-unused-vars */
 import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import axios from 'axios'
+import {useNavigate} from 'react-router-dom'
+import { toast } from "react-toastify";
 
 const RecruiterLogin = () => {
+   
+  const  navigate = useNavigate()
+
+
+
   const [state, setState] = useState("Login");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [image, setImage] = useState(false);
   const [isTextDataSubmited, setIsTextDataSubmited] = useState(false);
-  const {setShowRecruiterLogin} = useContext(AppContext)
+  const {setShowRecruiterLogin, backendUrl, setCompanyToken, setCompanyData } = useContext(AppContext)
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
     if (state === "Sign Up" && !isTextDataSubmited) {
-      setIsTextDataSubmited(true);
+      return setIsTextDataSubmited(true);
     }
+     
+    try {
+      if (state === 'Login') {
+         const  { data } = await axios.post(backendUrl + '/api/company/login', {email,password}) 
+
+         if (data.success) {
+           
+            setCompanyData(data.company)
+            setCompanyData(data.token)
+            localStorage.setItem('companyToken',data.token)
+            setShowRecruiterLogin(false)
+            navigate('/dashboard')
+         } 
+         else {
+               toast.error(data.message)
+         }
+
+      } else {
+            
+        const formData = new FormData()
+        formData.append('name', name)
+        formData.append('password', password)
+        formData.append('email', email)
+        formData.append('image', image)
+
+        const {data} = await axios.post(backendUrl + '/api/company/register'  , formData)
+
+        if (data.success) {
+        
+          setCompanyData(data.company)
+          setCompanyData(data.token)
+          localStorage.setItem('companyToken',data.token)
+          setShowRecruiterLogin(false)
+          navigate('/dashboard')
+        } else {
+          toast.error(data.message)
+        }
+
+      }
+
+
+
+    } catch (error) {
+      toast.error(error.message)
+    }
+
   };
 
   useEffect(()=>{
@@ -29,15 +84,15 @@ const RecruiterLogin = () => {
   },[])
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center">
+    <div className="absolute top-0  left-0 right-0 bottom-0 z-10 backdrop-blur-sm bg-black/30 flex justify-center items-center">
       <form
         onSubmit={onSubmitHandler}
-        className="relative bg-white p-10 rounded-xl text-slate-500 "
+        className="relative bg-white p-8 max-sm:w-[50vw] rounded-xl text-slate-500 "
       >
-        <h1 className="text-center text-2xl text-neutral-700 font-medium">
+        <h1 className="text-center text-2xl max-sm:text-sm text-neutral-700 font-medium">
           Emperi Staffing {state}
         </h1>
-        <p className="text-sm">Welcome back ! Please sign in to continue</p>
+        <p className="text-sm max-sm:text-xs">Welcome back ! Please sign in to continue</p>
         {state === "Sign Up" && isTextDataSubmited ? (
           <>
            <div className="flex items-center gap-4 my-10">

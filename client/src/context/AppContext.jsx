@@ -1,13 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { createContext } from "react";
 import { jobsData } from "../assets/assets";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const AppContext = createContext();
 
 export const AppContextProvider = (props) => {
+    
+     const  backendUrl  = import.meta.env.VITE_BACKEND_URL
+
   const [searchFilter, setSearchFilter] = useState({
     title: "",
     location: "",
@@ -19,15 +25,50 @@ export const AppContextProvider = (props) => {
 
   const [showRecruiterLogin,setShowRecruiterLogin] = useState(false)
 
+  const [companyToken , setCompanyToken] = useState(null)
+
+  const [companyData , setCompanyData] = useState(null)
+
 //   Function to  Fetch Jobs Data
 
 const fetchJobs = async () => {
  setJobs(jobsData)          
 }
 
+// Function to fetch company data 
+const fetchCompanyData = async  () => {
+  try {
+    const {data} = await axios.get(backendUrl + '/api/company/company',{headers:{token:companyToken}})
+    
+    if (data.success) {
+      setCompanyData(data.company)
+      console.log(data);
+      
+    } else {
+      toast.error(data.message)
+    }
+
+  } catch (error) {
+    toast.error(error.message)
+  }
+}
+
 useEffect(() =>{
  fetchJobs()
+
+ const storedCompanyToken = localStorage.getItem('companyToken')
+
+ if (storedCompanyToken) {
+  setCompanyToken(storedCompanyToken)
+ }
+
 },[])
+
+useEffect(()=>{
+if (companyToken) {
+  fetchCompanyData()
+}
+},[companyToken])
 
   const value = {
     setSearchFilter,
@@ -39,7 +80,16 @@ useEffect(() =>{
     jobs,
     setJobs,
     
-    showRecruiterLogin,setShowRecruiterLogin
+    showRecruiterLogin,
+    setShowRecruiterLogin,
+
+    companyToken,
+    setCompanyToken,
+
+    companyData,
+    setCompanyData,
+
+    backendUrl
   };
 
   return (

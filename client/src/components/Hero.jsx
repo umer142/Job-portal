@@ -24,6 +24,7 @@ const Hero = () => {
     <div className="container 2xl:px-20 mx-auto my-10">
       <div className="bg-gradient-to-r from-green-800 to-green-950 text-white py-16 text-center mx-2 rounded-xl ">
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4">
+          <span className="bg-yellow-200   py-2 px-5 mx-2  rounded-xl max-md:text-lg max-sm:text-xs text-black font-extrabold">Emperi Staffing</span>
           Over 10,000+ jobs to apply
         </h2>
         <p className="mb-8 max-w-xl mx-auto text-sm font-light px-5">
