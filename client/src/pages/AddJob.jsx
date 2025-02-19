@@ -12,7 +12,7 @@ const AddJob = () => {
   const editorRef = useRef(null);
   const quillRef = useRef(null);
 
-  const 
+ 
 
   useEffect(() => {
     // Initiate quil only once
