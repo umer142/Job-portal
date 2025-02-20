@@ -30,12 +30,13 @@ const RecruiterLogin = () => {
      
     try {
       if (state === 'Login') {
-         const  { data } = await axios.post(backendUrl + '/api/company/login', {email,password}) 
+         const  {data} = await axios.post(backendUrl + '/api/company/login', {email,password}) 
 
          if (data.success) {
+        
            
             setCompanyData(data.company)
-            setCompanyData(data.token)
+            setCompanyToken(data.token)
             localStorage.setItem('companyToken',data.token)
             setShowRecruiterLogin(false)
             navigate('/dashboard')
@@ -57,7 +58,7 @@ const RecruiterLogin = () => {
         if (data.success) {
         
           setCompanyData(data.company)
-          setCompanyData(data.token)
+          setCompanyToken(data.token)
           localStorage.setItem('companyToken',data.token)
           setShowRecruiterLogin(false)
           navigate('/dashboard')
