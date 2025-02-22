@@ -24,6 +24,7 @@ app.use(
     origin: "https://emperi-client.vercel.app", // Allow requests from your frontend
     methods: "GET,POST,PUT,DELETE",
     credentials: true, // Allow cookies/auth headers
+    allowedHeaders: "Content-Type,Authorization", // Add allowed headers
   })
 );
 app.use(express.json());
