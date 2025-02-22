@@ -8,9 +8,9 @@ const Footer = () => {
         <img className='' width={160} src={assets.logo} alt="" />
         <p className='flex-1 border-l border-gray-400 pl-4 text-sm text-gray-500 max-sm:hidden'>All right reserved. Copyright @Job-Emperi Staffing</p>
         <div className='flex gap-2.5'>
-            <img width={38} src={assets.facebook_icon} alt="" />
-            <img width={38} src={assets.instagram_icon} alt="" />
-            <img width={38} src={assets.twitter_icon} alt="" />
+            <img className='hover:bg-green-300 text-white  rounded-full' width={38} src={assets.facebook_icon} alt="" />
+            <img className='hover:bg-green-300 text-white  rounded-full' width={38} src={assets.instagram_icon} alt="" />
+            <img className='hover:bg-green-300 text-white  rounded-full' width={38} src={assets.twitter_icon} alt="" />
         </div>
     </div>
   )

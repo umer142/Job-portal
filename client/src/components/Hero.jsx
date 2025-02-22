@@ -67,11 +67,11 @@ const Hero = () => {
 
     {/* #################  */}
 
-    <div className="border justify-center items-center border-gray-300 shadow-md mx-2 mt-5 p-6 rounded-md flex ">
-      <div className="flex items-center justify-center gap-10 lg:gap-16 flex-wrap">
+    <div className="border justify-center items-center border-gray-300 shadow-md mx-2 mt-5 pt-2 px-6 rounded-md flex ">
+      <div className="flex items-center justify-center gap-16  flex-wrap">
       
 <div
-  className="div h-[8em] w-[15em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
+  className="div h-[8em] w-[10em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
 >
   <div
     className="circle absolute h-[5em] w-[5em] -top-[2.5em] -right-[2.5em] rounded-full bg-[#06641d] group-hover:scale-[800%] duration-500 z-[-1] op"
@@ -91,7 +91,7 @@ const Hero = () => {
   </h1>
 </div>
 <div
-  className="div h-[8em] w-[15em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
+  className="div h-[8em] w-[10em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
 >
   <div
     className="circle absolute h-[5em] w-[5em] -top-[2.5em] -right-[2.5em] rounded-full bg-[#119e0c] group-hover:scale-[800%] duration-500 z-[-1] op"
@@ -111,7 +111,7 @@ const Hero = () => {
   </h1>
 </div>
 <div
-  className="div h-[8em] w-[15em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
+  className="div h-[8em] w-[10em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
 >
   <div
     className="circle absolute h-[5em] w-[5em] -top-[2.5em] -right-[2.5em] rounded-full bg-[#106d04] group-hover:scale-[800%] duration-500 z-[-1] op"
@@ -131,7 +131,7 @@ Step Into Your Future Today
   </h1>
 </div>
 <div
-  className="div h-[8em] w-[15em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
+  className="div h-[8em] w-[10em] bg-white m-auto rounded-[1em] overflow-hidden relative group p-2 z-0"
 >
   <div
     className="circle absolute h-[5em] w-[5em] -top-[2.5em] -right-[2.5em] rounded-full bg-[#068a27] group-hover:scale-[800%] duration-500 z-[-1] op"

@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { assets } from "../assets/assets";
 
 const ManageJobs = () => {
   const navigate = useNavigate();
@@ -70,36 +71,37 @@ const ManageJobs = () => {
         <table className="min-w-full bg-white border border-gray-200 max-sm:text-sm ">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b border-gray-200 text-left  max-sm:hidden ">
+              <th className="py-2 px-3 border-b border-gray-200 text-left  max-sm:hidden ">
                 #
               </th>
-              <th className="py-2 px-4 border-b border-gray-200 text-left ">
+              <th className="py-2 px-3 border-b max-sm:text-xs border-gray-200 text-left ">
                 Job Title
               </th>
-              <th className="py-2 px-4 border-b border-gray-200 text-left max-sm:hidden  ">
+              <th className="py-2 px-3 border-b border-gray-200 text-left max-sm:hidden  ">
                 Date
               </th>
-              <th className="py-2 px-4 border-b border-gray-200 text-left max-sm:hidden  ">
+              <th className="py-2 px-3 border-b border-gray-200 text-left max-sm:hidden  ">
                 Loacation
               </th>
-              <th className="py-2 px-4 border-b border-gray-200  text-center">
+              <th className="py-2 px-3 border-b max-sm:text-xs border-gray-200  text-center">
                 Applications
               </th>
-              <th className="py-2 px-4 border-b border-gray-200 text-left ">
+              <th className="py-2 px-3 border-b max-sm:text-xs border-gray-200 text-left ">
                 Visible
               </th>
+              <th className="py-2 px-3 max-sm:text-xs border-b border-gray-200 text-left ">Deleted</th>
             </tr>
           </thead>
           <tbody>
             {jobs.map((job, index) => (
               <tr key={index} className="text-gray-700">
-                <td className="py-2 px-4 border-b border-gray-300 max-sm:hidden">
+                <td className="py-2 px-3 border-b border-gray-300 max-sm:hidden">
                   {index + 1}
                 </td>
-                <td className="py-2 px-4 border-b border-gray-300 ">
+                <td className="py-2 px-3 border-b border-gray-300 ">
                   {job.title}
                 </td>
-                <td className="py-2 px-4 border-b border-gray-300 max-sm:hidden">
+                <td className="py-2 px-3 border-b border-gray-300 max-sm:hidden">
                   {moment(job.date).format("ll")}
                 </td>
                 <td className="py-2 px-4 border-b border-gray-300 max-sm:hidden">
@@ -116,6 +118,8 @@ const ManageJobs = () => {
                     checked={job.visible}
                   />
                 </td>
+                <td className="py-8 px-4 border-b flex  items-center border-gray-300">
+                  <img  className="hover:bg-red-400 hover:text-white p-2 rounded-full" src={assets.cross_icon} alt="" /></td>
               </tr>
             ))}
           </tbody>
