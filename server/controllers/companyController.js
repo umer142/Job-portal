@@ -4,6 +4,7 @@ import {v2 as cloudinary } from 'cloudinary'
 import generateToken from "../utils/generateToken.js";
 import Job from "../models/Job.js";
 import JobApplication from "../models/JobApplication.js";
+import user from "../models/User.js";
 
 
 
@@ -141,13 +142,14 @@ export const postJob = async (req, res) => {
 
 // Get Company Job Applicants
 export const getCompanyJobApplicants = async (req, res) => {
-    try {
-        const companyId = req.company._id
 
+    const companyId = req.company._id
+
+    try {
         // Find Job applications for the user and populate related data 
         const applications =  await JobApplication.find({companyId})
-        .populate('userId','name image resume')
-        .populate('jobId', 'title location category level salary')
+        .populate({path: 'userId', select: 'name image resume', model: user})
+        .populate({path: 'jobId', select: 'title location category level salary'})
         .exec()
 
         return res.json({success:true, applications})

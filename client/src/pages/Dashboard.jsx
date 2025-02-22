@@ -66,7 +66,7 @@ const Dashboard = () => {
               <img src={assets.add_icon} alt="" />
               <p className="max-sm:hidden">Add Job</p>
             </NavLink>
-            <NavLink className={({isActive})=> ` flex items-center p-3 sm:px-6 gap-2 w-full hover-bg-gray-100 ${isActive && 'bg-blue-100 border-r-4 border-blue-500'}`} to={"./manage-job"}>
+            <NavLink className={({isActive})=> ` flex items-center p-3 sm:px-6 gap-2 w-full hover-bg-gray-100 ${isActive && 'bg-blue-100 border-r-4 border-blue-500'}`} to={"./manage-jobs"}>
               <img src={assets.home_icon} alt="" />
               <p className="max-sm:hidden">Manage Jobs</p>
             </NavLink>

@@ -57,7 +57,7 @@ const JobListing = () => {
                   </span>
                 )}
                 {searchFilter.location !== "" && (
-                  <span className="ml-2 inline-flex items-center gap-2.5 bg-green-50 border border-green-200 px-4 py-1.5 rounded">
+                  <span className="ml-2 inline-flex items-center gap-2.5 bg-green-50 border border-green-200 px- py-1.5 rounded">
                     {searchFilter.location}
                     <img
                       onClick={() => setSearchFilter((prev) => ({ ...prev, location: "" }))}

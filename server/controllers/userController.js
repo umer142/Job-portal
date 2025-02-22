@@ -1,6 +1,8 @@
 import JobApplication from "../models/JobApplication.js"
+import Job from "../models/Job.js";
 import User from "../models/User.js"
-import { v2 as cloudinary } from "cloudinary"
+import { v2 as cloudinary } from "cloudinary";
+import { ObjectId } from "mongodb";
 
 // Get User data
 export const getUserData = async (req, res) => {
@@ -24,19 +26,22 @@ export const getUserData = async (req, res) => {
 
 //  Apply for a Job
 export const  applyForJob =  async (req,res) => {
+    console.log(req.body.jobId);
+    console.log(req.auth.userId);
 
-    const {jobId} = req.body
-
-    const userId = req.auth.userId
+    const jobId = new ObjectId(req.body.jobId);
+    const userId = req.auth.userId;
 
     try {
-        const isAlreadyApplied = await JobApplication.find({jobId,userId})
+        const isAlreadyApplied = await JobApplication.find({"jobId": jobId, "userId": userId})
          
         if (isAlreadyApplied.length > 0) {
             return res.json({success:false, message:'Already Applied'})
         }
 
-        const jobData = await JobApplication.findById(jobId)
+
+
+        const jobData = await Job.findById(jobId)
 
         if (!jobData) {
             return res.json({success:false, message:"Job Not Found"})
@@ -47,7 +52,6 @@ export const  applyForJob =  async (req,res) => {
             userId,
             jobId,
             date: Date.now()
-
         })
 
         res.json({success:true, message:'Applied Successfully'})
@@ -61,11 +65,11 @@ export const  applyForJob =  async (req,res) => {
 
 // Get user applied applications
 export const  getUserJobApplications = async (req,res) =>{
+    const userId = req.auth.userId;
 
+    console.log(userId);
     try {
-        const userId = req.auth.userId
-        
-        const applications =  await JobApplication.find({ userId})
+        const applications =  await JobApplication.find({userId: userId})
         .populate('companyId', 'name email image')
         .populate('jobId', 'title description location category level salary')
         .exec()
@@ -74,7 +78,7 @@ export const  getUserJobApplications = async (req,res) =>{
             return  res.json({success: false, message: 'No Job applications found for this user.'})
         }
 
-        return res.json({success:true, application})
+        return res.json({success:true, applications})
     } catch (error) {
         res.json({success:false, message:error.message})
     }
@@ -92,7 +96,7 @@ export const updateUserResume = async (req,res) => {
 
         if (resumeFile) {
 
-            const resumeUpload =  await cloudinary.uploader.upload(resumeFile.path)
+            const resumeUpload =  await cloudinary.uploader.upload(resumeFile.path,)
             userData.resume = resumeUpload.secure_url
             
         }

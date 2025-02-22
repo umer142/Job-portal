@@ -94,7 +94,7 @@ const fetchUserData =  async () => {
     try {
       const token = await getToken()
       const {data} = await  axios.get(backendUrl+'/api/users/applications',
-        {headers:{Authorization:`Bearer ${token}`}}
+        {headers:{Authorization:`${token}`}}
       )
       if (data.success) {
         setUserApplications(data.applications)
@@ -131,23 +131,15 @@ const fetchUserData =  async () => {
   },[user])
 
   const value = {
-    setSearchFilter,
-    searchFilter,
-    isSearched,
-    setIsSearched,
-    jobs,
-    setJobs,
-    showRecruiterLogin,
-    setShowRecruiterLogin,
-    companyToken,
-    setCompanyToken,
-    companyData,
-    setCompanyData,
+    setSearchFilter,searchFilter,
+    isSearched,setIsSearched,
+    jobs,setJobs,
+    showRecruiterLogin,setShowRecruiterLogin,
+    companyToken,setCompanyToken,
+    companyData,setCompanyData,
     backendUrl,
-    userData,
-    setUserData,
-    userApplications,
-    setUserApplications,
+    userData,setUserData,
+    userApplications,setUserApplications,
     fetchUserData,
     fetchUserApplications
   };

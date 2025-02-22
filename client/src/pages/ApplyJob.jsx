@@ -30,7 +30,7 @@ const ApplyJob = () => {
     try {
       const {data} =  await axios.get(backendUrl+`/api/jobs/${id}`)
       if (data.success) {
-        setJobData(data.job)
+        setJobData(data.job);
       }else{
         toast.error(data.message)
       }
@@ -51,15 +51,15 @@ const ApplyJob = () => {
       }
 
       const token = await getToken()
-
       const {data} = await axios.post(backendUrl + '/api/users/apply',
         {jobId: JobData._id}, 
-        { headers: {Authorization: ` Bearer ${token}`}}
+      
+        { headers: {Authorization: `${token}`}}
       )
        if (data.success) {
           toast.success(data.message)
           fetchUserApplications()
-       }    else{
+       } else{
             toast.error(data.message)
        }
        
@@ -92,7 +92,7 @@ const ApplyJob = () => {
     <>
     <Navbar/>
    
-      <div className='min-h-screen flex flex-col py-10 container px-8 2xl:px-20 mx-auto'>
+      <div className='min-h-screen flex flex-col py-10 container px-8 2xl:px-20 mx-auto' id={JobData.id}>
         <div className='bg-white text-black rounded-lg w-full  '>
           <div className='flex justify-center md:justify-between flex-wrap gap-8 px-14 py-20 bg-green-50 border border-green-400 rounded-xl'>
             <div className='flex flex-col md:flex-row items-center'>

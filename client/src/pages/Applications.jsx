@@ -29,9 +29,8 @@ const Applications = () => {
           const  token =  await getToken()
 
           const { data} = await axios.post(backendUrl+ '/api/users/update-resume',
-            formData,  {
-              headers:{Authorization: `Bearer  ${token}`}
-            }
+            formData, 
+             {headers:{Authorization: `${token}`}}
           )
           if (data.success) {
             toast.success(data.message)
@@ -64,7 +63,7 @@ const Applications = () => {
         <h2 className="text-xl font-semibold">Your Resume</h2>
         <div className="flex gap-2 mb-6 mt-3">
           {isEdit || userData && userData.resume === ''
-           ? (
+           ?
             <>
               <label className="flex items-center" htmlFor="resumeUpload">
                 <p className="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg mr-2 ">
@@ -86,7 +85,7 @@ const Applications = () => {
                 Save
               </button>
             </>
-          ) : (
+           : 
             <div className="flex gap-2">
               <a
                 className="bg-blue-100 text-blue-600 px-4 py-2 rounded-lg "
@@ -101,7 +100,7 @@ const Applications = () => {
                 Edit
               </button>
             </div>
-          )}
+          }
         </div>
         <h2 className="text-xl font-semibold mb-4 " >Jobs Applied</h2>
         <table className="min-w-full bg-white border border-gray-300 rounded-lg ">
