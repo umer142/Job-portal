@@ -21,7 +21,7 @@ await connectCloudinary();
 // Middlewares
 app.use(
   cors({
-    origin: "https://emperi-client.vercel.app", // Allow requests from your frontend
+    origin: "*", // Allow requests from your frontend
     methods: "GET,POST,PUT,DELETE",
     credentials: true, // Allow cookies/auth headers
     allowedHeaders: "Content-Type,Authorization", // Add allowed headers
