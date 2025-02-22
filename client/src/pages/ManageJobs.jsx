@@ -42,20 +42,18 @@ const ManageJobs = () => {
     try {
       const { data } = await axios.post(
         backendUrl + "/api/company/change-visiblity",
-        {id},
-        { headers: { token: companyToken }}
+        { id },
+        { headers: { token: companyToken } }
       );
-       
+
       if (data.success) {
-        toast.success(data.message )
-        fetchCompanyJobs()
-      }  else {
-        toast.error(data.message)
+        toast.success(data.message);
+        fetchCompanyJobs();
+      } else {
+        toast.error(data.message);
       }
-
-
     } catch (error) {
-      toast.error(error.message)
+      toast.error(error.message);
     }
   };
 
@@ -64,7 +62,25 @@ const ManageJobs = () => {
       fetchCompanyJobs();
     }
   }, [companyToken]);
-
+  const handleDeleteJob = async ({ jobId }) => {
+    try {
+      const response = await axios.delete(
+        backendUrl + `/api/company/jobs/delete/${jobId}`,
+        {
+          headers: { token: companyToken },
+        }
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+        window.location.reload();
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+    //
+  };
   return (
     <div className="container p-4 max-w-5xl">
       <div className="overflow-x-auto">
@@ -89,7 +105,9 @@ const ManageJobs = () => {
               <th className="py-2 px-3 border-b max-sm:text-xs border-gray-200 text-left ">
                 Visible
               </th>
-              <th className="py-2 px-3 max-sm:text-xs border-b border-gray-200 text-left ">Deleted</th>
+              <th className="py-2 px-3 max-sm:text-xs border-b border-gray-200 text-left ">
+                Deleted
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -119,7 +137,14 @@ const ManageJobs = () => {
                   />
                 </td>
                 <td className="py-8 px-4 border-b flex  items-center border-gray-300">
-                  <img  className="hover:bg-red-400 hover:text-white p-2 rounded-full" src={assets.cross_icon} alt="" /></td>
+                  <button onClick={() => handleDeleteJob({ jobId: job._id })}>
+                    <img
+                      className="hover:bg-red-400 hover:text-white p-2 rounded-full"
+                      src={assets.cross_icon}
+                      alt=""
+                    />
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

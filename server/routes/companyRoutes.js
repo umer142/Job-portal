@@ -49,6 +49,6 @@ router.put(
   updateApplicationStatus
 );
 
-router.delete("/jobs/delete/:jobId", deleteJob);
+router.delete("/jobs/delete/:jobId", protectCompany, deleteJob);
 
 export default router;
