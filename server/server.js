@@ -15,19 +15,38 @@ import { clerkMiddleware } from "@clerk/express";
 const app = express();
 
 // Connect to database
-await connectDB();
-await connectCloudinary();
+(async () => {
+  await connectDB();
+  await connectCloudinary();
+})();
 
 // Middlewares
+
 app.use(
   cors({
-    origin: "*", // Allow requests from your frontend
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true, // Allow cookies/auth headers
-    allowedHeaders:
-      "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version,Authorization,token", // Add allowed headers
+    origin: [
+      "https://emperi-client.vercel.app",
+      "https://www.emperi-client.vercel.com",
+      "http://localhost:5173",
+    ], // ✅ Allow only your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // ✅ Allow sending cookies/auth headers
+    allowedHeaders: [
+      "X-CSRF-Token",
+      "X-Requested-With",
+      "Accept",
+      "Accept-Version",
+      "Content-Length",
+      "Content-MD5",
+      "Content-Type",
+      "Date",
+      "X-Api-Version",
+      "Authorization",
+      "token",
+    ], // ✅ Ensure these headers are allowed
   })
 );
+
 app.use(express.json());
 app.use(clerkMiddleware());
 // Routes
