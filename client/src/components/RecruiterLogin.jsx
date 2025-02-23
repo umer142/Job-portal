@@ -150,9 +150,7 @@ const RecruiterLogin = () => {
           </>
         )}
         {state === "Login" && (
-          <p className="text-sm text-blue-500 mt-4 cursor-pointer">
-            Forget Password ?
-          </p>
+          <p className="text-sm text-blue-500 mt-4 cursor-pointer"></p>
         )}
 
         <button
@@ -166,15 +164,7 @@ const RecruiterLogin = () => {
             : "next"}
         </button>
         {state === "Login" ? (
-          <p className="text-center mt-5">
-            Dont have an account?{" "}
-            <span
-              className="text-lg text-blue-600 cursor-pointer"
-              onClick={() => setState("Sign Up")}
-            >
-              Sign Up
-            </span>
-          </p>
+          <p className="text-center mt-5">Dont have an account? </p>
         ) : (
           <p className="text-center mt-5">
             Already hav an account?{" "}
