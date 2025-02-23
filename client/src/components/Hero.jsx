@@ -18,55 +18,46 @@ const Hero = () => {
   };
 
   return (
-    <div className="container   my-10">
-      <div className="bg-gradient-to-r from-green-800 max-sm:w-[110vw]  ml-7 max-sm:ml-1 mr-7 md:mr-5 max-sm:mr-1 to-green-950 text-white py-16 text-center mx-2 rounded-xl ">
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium mb-4">
+    <div className="container mx-auto px-4 my-10">
+      <div className="bg-gradient-to-r from-green-800 to-green-950 text-white py-16 text-center rounded-xl max-w-5xl mx-auto px-4">
+        <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-medium mb-4">
           Emperi Staffing Over 10,000+ jobs to apply
         </h2>
-        <p className="mb-8 max-w-xl mx-auto text-sm font-light px-5">
+        <p className="mb-8 max-w-xl mx-auto text-sm sm:text-base font-light px-5">
           Your Next Big Career Move Starts Right Here - Explore the Best Job
           Opportunities and Take the First Step Toward Your Future!
         </p>
-        <div className="flex items-center bg-white rounded max-sm:w-xs text-gray-600 max-w-xl pl-4 mx-4  sm:mx-auto   ">
-          <div className="flex items-center">
-            <img className="h-4 sm:h-5" src={assets.search_icon} alt="" />
+        <div className="flex flex-col sm:flex-row items-center bg-white rounded-md text-gray-600 max-w-xl mx-auto p-2 space-y-3 sm:space-y-0 sm:space-x-2">
+          <div className="flex items-center w-full border rounded-md p-2">
+            <img className="h-5 mr-2" src={assets.search_icon} alt="Search" />
             <input
               ref={titleRef}
               type="text"
               placeholder="Search for jobs"
-              className="max-sm:text-xs p-2  rounded outline-none w-full "
+              className="text-sm w-full outline-none"
             />
           </div>
-          <div className="flex items-center">
-            <img className="h-4 sm:h-5" src={assets.location_icon} alt="" />
+          <div className="flex items-center w-full border rounded-md p-2">
+            <img
+              className="h-5 mr-2"
+              src={assets.location_icon}
+              alt="Location"
+            />
             <input
               ref={locationRef}
               type="text"
               placeholder="Location"
-              className="max-sm:text-xs  p-2 rounded outline-none w-full "
+              className="text-sm w-full outline-none"
             />
           </div>
-
           <button
             onClick={onSearch}
-            className="relative flex items-center px-8 py-3 overflow-hidden font-medium transition-all m-1 bg-indigo-500 rounded-md group"
+            className="w-full sm:w-auto px-6 py-3 font-medium transition bg-indigo-500 rounded-md text-white hover:bg-indigo-600"
           >
-            <span className="absolute top-0 right-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-mr-4 group-hover:-mt-4">
-              <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-            </span>
-            <span className="absolute bottom-0 rotate-180 left-0 inline-block w-4 h-4 transition-all duration-500 ease-in-out bg-indigo-700 rounded group-hover:-ml-4 group-hover:-mb-4">
-              <span className="absolute top-0 right-0 w-5 h-5 rotate-45 translate-x-1/2 -translate-y-1/2 bg-white"></span>
-            </span>
-            <span className="absolute bottom-0 left-0 w-full h-full transition-all duration-500 ease-in-out delay-200 -translate-x-full bg-indigo-600 rounded-md group-hover:translate-x-0"></span>
-            <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-white">
-              {" "}
-              Search
-            </span>
+            Search
           </button>
         </div>
       </div>
-
-      {/* #################  */}
     </div>
   );
 };
