@@ -24,13 +24,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: [
-      "https://emperi-client.vercel.app",
-      "https://www.emperi-client.vercel.com",
-      "http://localhost:5173",
-    ], // ✅ Allow only your frontend
+    origin: ["https://job-portal-three-eta.vercel.app/"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // ✅ Allow sending cookies/auth headers
+    credentials: true,
     allowedHeaders: [
       "X-CSRF-Token",
       "X-Requested-With",
@@ -43,7 +39,7 @@ app.use(
       "X-Api-Version",
       "Authorization",
       "token",
-    ], // ✅ Ensure these headers are allowed
+    ],
   })
 );
 

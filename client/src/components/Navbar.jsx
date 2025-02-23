@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="container   px-4  2xl:px-20 mx-auto flex justify-between items-center">
         <img
           onClick={() => navigate("/")}
-          className=" h-22 scale-200 cursor-pointer"
+          className=" h-22 scale-200  max-sm:scale-120  cursor-pointer"
           src={assets.logo}
           alt=""
         />
@@ -34,13 +34,13 @@ const Navbar = () => {
           <div className="flex gap-4 max-sm:text-xs">
             <button
               onClick={(e) => setShowRecruiterLogin(true)}
-              className="text-white py-3 px-6 rounded-full cursor-pointer hover:bg-black  bg-green-600"
+              className=" py-3 px-6 rounded-full "
             >
               Recruiter Login
             </button>
             <button
               onClick={(e) => openSignIn()}
-              className="bg-black text-white hover:bg-green-500 px-6 sm:px-9 py-3 rounded-full"
+              className="bg-black text-white hover:bg-green-500 px-4 sm:px-9 py-1 rounded-full"
             >
               Login
             </button>
