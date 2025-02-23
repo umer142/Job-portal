@@ -36,7 +36,7 @@ const Dashboard = () => {
               <p className="max-sm:hidden">Welcome, {companyData.name} </p>
               <div className="relative group">
                 <img
-                  className="w-8 border border-gray-200 rounded-full"
+                  className="w-12 border border-gray-200 rounded-full"
                   src={companyData.image}
                   alt=""
                 />
