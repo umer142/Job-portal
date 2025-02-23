@@ -13,8 +13,8 @@ const Navbar = () => {
   const { setShowRecruiterLogin } = useContext(AppContext);
 
   return (
-    <div className="shadow  ">
-      <div className="container   px-4  2xl:px-20 mx-auto flex justify-between items-center">
+    <div className="shadow w-full  max-sm:w-[110vw]">
+      <div className="container    px-4  2xl:px-20 mx-auto flex justify-between items-center">
         <img
           onClick={() => navigate("/")}
           className=" h-22 scale-190 mx-5 max-sm:scale-120  cursor-pointer"
@@ -31,7 +31,7 @@ const Navbar = () => {
             <UserButton />
           </div>
         ) : (
-          <div className="flex gap-4 max-sm:text-xs">
+          <div className="flex  max-sm:text-xs">
             <button
               onClick={(e) => setShowRecruiterLogin(true)}
               className=" py-3 px-6 rounded-full "
@@ -40,7 +40,7 @@ const Navbar = () => {
             </button>
             <button
               onClick={(e) => openSignIn()}
-              className="bg-black text-white hover:bg-green-500 px-4 sm:px-9 py-1 rounded-full"
+              className="bg-black text-white max-sm:text-sm max-sm:mx-5  px-12 max-sm:bg-transparent max-sm:text-black py-1 rounded-full"
             >
               Login
             </button>
