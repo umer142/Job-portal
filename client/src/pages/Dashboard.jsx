@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { AppContext } from "../context/AppContext";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ const Dashboard = () => {
       <div className="shadow ">
         <div className="px-5 flex justify-between items-center">
           <img
-            onClick={(e) => navigate("/")}
             className="max-sm:w-32 h-22 scale-200  cursor-pointer "
             src={assets.logo}
             alt=""
@@ -65,17 +65,6 @@ const Dashboard = () => {
         {/* Left Sidebar with options to add jobs , mange jobs , views jobs , view applcations */}
         <div className="inline-block min-h-screen border-gray-200  border-r-1 ">
           <ul className="flex flex-col items-center pt-5 text-gray-800">
-            <NavLink
-              className={({ isActive }) =>
-                ` flex items-center p-3 sm:px-6 gap-2 w-full hover-bg-gray-100 ${
-                  isActive && "bg-blue-100 border-r-4 border-blue-500"
-                }`
-              }
-              to={"./add-job"}
-            >
-              <img src={assets.add_icon} alt="" />
-              <p className="max-sm:hidden">Add Job</p>
-            </NavLink>
             <NavLink
               className={({ isActive }) =>
                 ` flex items-center p-3 sm:px-6 gap-2 w-full hover-bg-gray-100 ${
