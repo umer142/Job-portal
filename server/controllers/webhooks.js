@@ -1,4 +1,3 @@
-import { Webhook } from "svix";
 import User from "../models/User.js";
 
 // API Controller function to Manage clerk User With database
@@ -24,7 +23,7 @@ export const clerkWebhooks = async (req, res) => {
       case "user.created": {
         console.log("Created user..............");
         const userData = {
-          _id: data.id,
+          _id: data._id,
           email: data.email_addresses[0].email_address,
           name: data.first_name + " " + data.last_name,
           image: data.image_url,
