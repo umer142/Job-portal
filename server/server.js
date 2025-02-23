@@ -24,22 +24,9 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://job-portal-three-eta.vercel.app/"],
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
-    allowedHeaders: [
-      "X-CSRF-Token",
-      "X-Requested-With",
-      "Accept",
-      "Accept-Version",
-      "Content-Length",
-      "Content-MD5",
-      "Content-Type",
-      "Date",
-      "X-Api-Version",
-      "Authorization",
-      "token",
-    ],
   })
 );
 
