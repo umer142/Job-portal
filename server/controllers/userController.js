@@ -8,9 +8,9 @@ import { ObjectId } from "mongodb";
 export const getUserData = async (req, res) => {
   try {
     const userId = req.auth.userId;
-    console.log(userId);
+    console.log("userId: ", userId);
     const user = await User.findById(userId);
-
+    console.log("user: ", user);
     if (!user) {
       return res.json({ success: false, message: "User Not Found" });
     }
@@ -53,6 +53,32 @@ export const applyForJob = async (req, res) => {
     });
 
     res.json({ success: true, message: "Applied Successfully" });
+  } catch (error) {
+    res.json({ success: false, message: error.message });
+  }
+};
+
+export const createUser = async (req, res) => {
+  const userId = req.auth.userId;
+  const name = req.name;
+  const email = req.email;
+  const image = req.image;
+
+  try {
+    const userData = await User.findById(userId);
+
+    if (userData) {
+      return res.json({ success: false, message: "Already has user" });
+    }
+
+    await User.create({
+      _id: userId,
+      name: name,
+      email: email,
+      image: image,
+    });
+
+    res.json({ success: true, message: "User created Successfully" });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }

@@ -6,14 +6,14 @@ import User from "../models/User.js";
 export const clerkWebhooks = async (req, res) => {
   try {
     // Create a Svix instance with clerk webhook secret.
-    const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
+    // const whook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
 
-    // Verifying Headers
-    await whook.verify(JSON.stringify(req.body), {
-      "svix-id": req.headers["svix-id"],
-      "svix-timestamp": req.headers["svix-timestamp"],
-      "svix-signature": req.headers["svix-signature"],
-    });
+    // // Verifying Headers
+    // await whook.verify(JSON.stringify(req.body), {
+    //   "svix-id": req.headers["svix-id"],
+    //   "svix-timestamp": req.headers["svix-timestamp"],
+    //   "svix-signature": req.headers["svix-signature"],
+    // });
 
     // getting Data from request body
 
@@ -22,6 +22,7 @@ export const clerkWebhooks = async (req, res) => {
     // Switch Case for diffrent events
     switch (type) {
       case "user.created": {
+        console.log("Created user..............");
         const userData = {
           _id: data.id,
           email: data.email_addresses[0].email_address,
@@ -55,6 +56,6 @@ export const clerkWebhooks = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    res.json({ success: false, message: "Webhooks Error" });
-}
+    res.json({ success: false, message: "Webhooks Error" });
+  }
 };

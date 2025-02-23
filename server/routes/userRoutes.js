@@ -1,6 +1,7 @@
 import express from "express";
 import {
   applyForJob,
+  createUser,
   getUserData,
   getUserJobApplications,
   updateUserResume,
@@ -11,9 +12,11 @@ const router = express.Router();
 
 // Get user Data
 router.get("/user", getUserData);
+router.post("/create-user", createUser);
 
 // Apply for a job
 router.post("/apply", applyForJob);
+// Apply for a job
 
 // Get applied jobs Data
 router.get("/applications", getUserJobApplications);

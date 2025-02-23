@@ -30,7 +30,7 @@ const Dashboard = () => {
     <div className="min-h-screen ">
       {/* Navbar For recruiter Panal  */}
       <div className="shadow ">
-        <div className="px-5 flex justify-between items-center">
+        <div className="px-5 py-8 flex justify-between items-center">
           {companyData && (
             <div className="flex items-center gap-3">
               <p className="max-sm:hidden">Welcome, {companyData.name} </p>
