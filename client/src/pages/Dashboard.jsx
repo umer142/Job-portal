@@ -31,11 +31,6 @@ const Dashboard = () => {
       {/* Navbar For recruiter Panal  */}
       <div className="shadow ">
         <div className="px-5 flex justify-between items-center">
-          <img
-            className="max-sm:w-32 h-22 scale-200  cursor-pointer "
-            src={assets.logo}
-            alt=""
-          />
           {companyData && (
             <div className="flex items-center gap-3">
               <p className="max-sm:hidden">Welcome, {companyData.name} </p>
