@@ -56,9 +56,7 @@ export const clerkWebhooks = async (req, res) => {
 
         if (!updatedUser) {
           console.log("❌ User not found for update:", data.id);
-          return res
-            .status(404)
-            .json({ success: false, message: "User Not Found" });
+          return res.status(404).json({ success: false });
         }
 
         console.log("✅ User updated successfully:", updatedUser);
@@ -72,9 +70,7 @@ export const clerkWebhooks = async (req, res) => {
 
         if (!deletedUser) {
           console.log("❌ User not found for deletion:", data.id);
-          return res
-            .status(404)
-            .json({ success: false, message: "User Not Found" });
+          return res.status(404).json({ success: false });
         }
 
         console.log("✅ User deleted successfully:", deletedUser);
