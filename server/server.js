@@ -30,6 +30,7 @@ const startServer = async () => {
     app.use(
       cors({
         origin: "https://job-portal-client-iglg.onrender.com",
+        origin: "https://emperistaffing.com",
         methods: ["GET", "POST", "PUT", "DELETE"],
         credentials: true,
       })
