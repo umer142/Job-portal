@@ -1,10 +1,10 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-  _id: { type: String, required: true }, // Clerk ID as _id
+  clerkId: { type: String, required: true, unique: true }, // Add Clerk ID field
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  resume: { type: String, default: "" }, // Default empty string for optional fields
+  resume: { type: String, default: "" },
   image: { type: String, required: true },
 });
 
