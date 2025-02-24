@@ -54,35 +54,15 @@ export const clerkWebhooks = async (req, res) => {
           { new: true }
         );
 
-        if (!updatedUser) {
-          console.log("❌ User not found for update:", data.id);
-          return res.status(404).json({ success: false });
-        }
-
         console.log("✅ User updated successfully:", updatedUser);
         res.json({ success: true, message: "User updated" });
         break;
       }
-      case "user.deleted": {
-        console.log("✅ Deleting user from database...");
-
-        const deletedUser = await User.findOneAndDelete({ clerkId: data.id });
-
-        if (!deletedUser) {
-          console.log("❌ User not found for deletion:", data.id);
-          return res.status(404).json({ success: false });
-        }
-
-        console.log("✅ User deleted successfully:", deletedUser);
-        res.json({ success: true, message: "User deleted" });
-        break;
-      }
       default:
-        console.log("⚠️ Unhandled Clerk webhook event:", type);
+        console.log("⚠️ Unhandled event type:", type);
         res
           .status(400)
-          .json({ success: false, message: "Unhandled webhook event" });
-        break;
+          .json({ success: false, message: "Unhandled event type" });
     }
   } catch (error) {
     console.error("❌ Webhook Error:", error.message);
