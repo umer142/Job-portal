@@ -14,41 +14,49 @@ import { clerkMiddleware } from "@clerk/express";
 // Initialize Express
 const app = express();
 
-// Connect to database
-(async () => {
-  await connectDB();
-  await connectCloudinary();
-})();
+// ✅ FIX 1: JSON Middleware should be before Clerk
+app.use(express.json()); // ⬅️ This should be before clerkMiddleware
 
-// Middlewares
+// ✅ FIX 2: Ensure Database and Cloudinary Connections are Established
+const startServer = async () => {
+  try {
+    await connectDB();
+    await connectCloudinary();
 
-app.use(
-  cors({
-    origin: "https://job-portal-client-iglg.onrender.com",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+    // ✅ FIX 3: Clerk Middleware AFTER JSON parsing
+    app.use(clerkMiddleware());
 
-app.use(clerkMiddleware());
-app.use(express.json());
-// Routes
+    // ✅ CORS Configuration
+    app.use(
+      cors({
+        origin: "https://job-portal-client-iglg.onrender.com",
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+      })
+    );
 
-app.get("/", (req, res) => res.send("Api is working"));
-app.get("/debug-sentry", function mainHandler(req, res) {
-  throw new Error("My first Sentry error!");
-});
+    // Routes
+    app.get("/", (req, res) => res.send("API is working"));
+    app.get("/debug-sentry", function mainHandler(req, res) {
+      throw new Error("My first Sentry error!");
+    });
 
-app.post("/webhooks", clerkWebhooks);
-app.use("/api/company", companyRoutes);
-app.use("/api/jobs", jobRoutes);
-app.use("/api/users", userRoutes);
+    app.post("/webhooks", clerkWebhooks);
+    app.use("/api/company", companyRoutes);
+    app.use("/api/jobs", jobRoutes);
+    app.use("/api/users", userRoutes);
 
-// PORT
-const PORT = process.env.PORT || 5000;
+    // PORT
+    const PORT = process.env.PORT || 5000;
+    Sentry.setupExpressErrorHandler(app);
 
-Sentry.setupExpressErrorHandler(app);
+    app.listen(PORT, () => {
+      console.log(`🚀 Server is running on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("❌ Error starting server:", error);
+    process.exit(1); // Exit process if connection fails
+  }
+};
 
-app.listen(PORT, () => {
-  console.log(`server is running on port ${PORT}`);
-});
+startServer(); // Start the server

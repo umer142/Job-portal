@@ -29,7 +29,7 @@ export const clerkWebhooks = async (req, res) => {
         }
 
         const userData = {
-          clerkId: data.id, // Clerk ID stored separately
+          clerkId: data.id, // Store Clerk ID properly
           email: data.email_addresses[0].email_address,
           name: `${data.first_name} ${data.last_name}`,
           image: data.image_url,
@@ -45,7 +45,7 @@ export const clerkWebhooks = async (req, res) => {
         console.log("✅ Updating user in database...");
 
         const updatedUser = await User.findOneAndUpdate(
-          { clerkId: data.id },
+          { clerkId: data.id }, // Find user by Clerk ID, not _id
           {
             email: data.email_addresses[0].email_address,
             name: `${data.first_name} ${data.last_name}`,
