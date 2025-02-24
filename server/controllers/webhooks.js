@@ -1,6 +1,7 @@
 import User from "../models/User.js";
-import { Webhook } from "svix";
+import { Webhook } from "svix"; // Ensure Webhook is imported
 
+// API Controller function to manage Clerk user with database
 export const clerkWebhooks = async (req, res) => {
   try {
     console.log(
@@ -21,15 +22,9 @@ export const clerkWebhooks = async (req, res) => {
     switch (type) {
       case "user.created": {
         console.log("✅ Creating new user in database...");
-
-        const userExists = await User.findOne({ clerkId: data.id });
-        if (userExists) {
-          console.log("⚠️ User already exists:", userExists);
-          return res.json({ success: true, message: "User already exists" });
-        }
-
         const userData = {
-          clerkId: data.id, // Store Clerk ID properly
+          _id: data.id, // ✅ Clerk ID as _id (String)
+          clerkId: data.id, // ✅ Store Clerk ID separately for queries
           email: data.email_addresses[0].email_address,
           name: `${data.first_name} ${data.last_name}`,
           image: data.image_url,
@@ -43,14 +38,16 @@ export const clerkWebhooks = async (req, res) => {
       }
       case "user.updated": {
         console.log("✅ Updating user in database...");
+        const userData = {
+          email: data.email_addresses[0].email_address,
+          name: `${data.first_name} ${data.last_name}`,
+          image: data.image_url,
+        };
 
+        // ✅ Find user by clerkId (not _id)
         const updatedUser = await User.findOneAndUpdate(
-          { clerkId: data.id }, // Find user by Clerk ID, not _id
-          {
-            email: data.email_addresses[0].email_address,
-            name: `${data.first_name} ${data.last_name}`,
-            image: data.image_url,
-          },
+          { clerkId: data.id }, // ✅ Use clerkId for finding users
+          userData,
           { new: true }
         );
 
@@ -67,7 +64,6 @@ export const clerkWebhooks = async (req, res) => {
       }
       case "user.deleted": {
         console.log("✅ Deleting user from database...");
-
         const deletedUser = await User.findOneAndDelete({ clerkId: data.id });
 
         if (!deletedUser) {
