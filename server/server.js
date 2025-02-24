@@ -30,8 +30,8 @@ app.use(
   })
 );
 
-app.use(express.json());
 app.use(clerkMiddleware());
+app.use(express.json());
 // Routes
 
 app.get("/", (req, res) => res.send("Api is working"));
