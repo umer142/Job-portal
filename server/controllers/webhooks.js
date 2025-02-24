@@ -1,5 +1,5 @@
 import User from "../models/User.js";
-import { Webhook } from "svix"; // Ensure you import Webhook
+import { Webhook } from "svix";
 
 export const clerkWebhooks = async (req, res) => {
   try {
@@ -22,17 +22,14 @@ export const clerkWebhooks = async (req, res) => {
       case "user.created": {
         console.log("✅ Creating new user in database...");
 
-        // Check if user already exists before creating
-        const existingUser = await User.findById(data.id);
-        if (existingUser) {
-          console.log("⚠️ User already exists:", existingUser);
-          return res
-            .status(200)
-            .json({ success: true, message: "User already exists" });
+        const userExists = await User.findOne({ clerkId: data.id });
+        if (userExists) {
+          console.log("⚠️ User already exists:", userExists);
+          return res.json({ success: true, message: "User already exists" });
         }
 
         const userData = {
-          _id: data.id, // Clerk ID stored as _id
+          clerkId: data.id, // Use clerkId instead of _id
           email: data.email_addresses[0].email_address,
           name: `${data.first_name} ${data.last_name}`,
           image: data.image_url,
@@ -41,22 +38,21 @@ export const clerkWebhooks = async (req, res) => {
 
         const newUser = await User.create(userData);
         console.log("✅ User created successfully:", newUser);
-
         res.json({ success: true, message: "User created" });
         break;
       }
       case "user.updated": {
         console.log("✅ Updating user in database...");
 
-        const userData = {
-          email: data.email_addresses[0].email_address,
-          name: `${data.first_name} ${data.last_name}`,
-          image: data.image_url,
-        };
-
-        const updatedUser = await User.findByIdAndUpdate(data.id, userData, {
-          new: true,
-        });
+        const updatedUser = await User.findOneAndUpdate(
+          { clerkId: data.id },
+          {
+            email: data.email_addresses[0].email_address,
+            name: `${data.first_name} ${data.last_name}`,
+            image: data.image_url,
+          },
+          { new: true }
+        );
 
         if (!updatedUser) {
           console.log("❌ User not found for update:", data.id);
@@ -72,7 +68,8 @@ export const clerkWebhooks = async (req, res) => {
       case "user.deleted": {
         console.log("✅ Deleting user from database...");
 
-        const deletedUser = await User.findByIdAndDelete(data.id);
+        const deletedUser = await User.findOneAndDelete({ clerkId: data.id });
+
         if (!deletedUser) {
           console.log("❌ User not found for deletion:", data.id);
           return res

@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   image: { type: String, required: true },
 });
 
+// Mongoose automatically assigns an `_id` of type ObjectId, no need to manually define it.
 const User = mongoose.model("User", userSchema);
 
 export default User;
